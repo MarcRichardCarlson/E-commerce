@@ -1,0 +1,9 @@
+.footer {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3.5rem;
+    background-color: #262626;
+    box-shadow: inset 0px 1px 10px #b9b9b97b;
+}
