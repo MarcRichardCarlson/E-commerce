@@ -42,25 +42,54 @@ const loginUser = async (email: string, password: string): Promise<UserCredentia
 
 
 
-/*Create Products*/
+/* Create Products */
 async function createProduct(productData: Product): Promise<void> {
-    try {
-      const productsCollectionRef = collection(db, "products");
-      await addDoc(productsCollectionRef, productData);
-      console.log("Product created successfully");
-    } catch (error) {
-      console.error("Error creating product:", error);
-      throw error;
-    }
+  try {
+    const productsCollectionRef = collection(db, "products");
+    const newProductRef = await addDoc(productsCollectionRef, productData);
+    console.log("Product created successfully with ID: ", newProductRef.id);
+  } catch (error) {
+    console.error("Error creating product:", error);
+    throw error;
+  }
 }
+
   
 
 
 /*Get Products*/
+const getProducts = async () => {
+  try {
+    const productsCollectionRef = collection(db, 'products');
+    const querySnapshot = await getDocs(productsCollectionRef);
+
+    const products: any[] = [];
+    querySnapshot.forEach((doc) => {
+      // Extract the document ID
+      const productId = doc.id;
+      // Get the product data
+      const productData = doc.data();
+      // Combine the ID and data into a single object
+      const productWithId = {
+        id: productId,
+        ...productData,
+      };
+      products.push(productWithId);
+    });
+
+    return products;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    return [];
+  }
+};
+/*
 const getProducts = async (): Promise<Product[]> => {
     try {
       const productsCollectionRef = collection(db, 'products');
       const querySnapshot = await getDocs(productsCollectionRef);
+
+      //console.log('querySnapshot' ,querySnapshot)
   
       const productsData: Product[] = [];
       querySnapshot.forEach((doc) => {
@@ -74,26 +103,56 @@ const getProducts = async (): Promise<Product[]> => {
       throw error;
     }
 };
-
-
-/*Get Product By Id*/
-const getProductById = async (productId: string): Promise<Product | null> => {
+*/
+/*
+async function getProductById(id: string): Promise<Product | null> {
   try {
-    const productDocRef = doc(db, 'products', productId);
+    const productDocRef = doc(db, "products", id);
     const productDocSnapshot = await getDoc(productDocRef);
+    //console.log('productDocRef', productDocRef)
+    console.log('productDocSnapshot' ,productDocSnapshot)
+    console.log('id', id)
 
     if (productDocSnapshot.exists()) {
       const productData = productDocSnapshot.data() as Product;
       return productData;
     } else {
-      // Product with the given ID does not exist
       return null;
     }
   } catch (error) {
-    console.error(`Error fetching product with ID ${productId}:`, error);
+    console.error(`Error fetching product with ID ${id}:`, error);
     throw error;
   }
+}
+*/
+
+/* Get Product By ID */
+const getProductById = async (productId: string) => {
+  try {
+    const productDocRef = doc(db, 'products', productId);
+    const productDocSnapshot = await getDoc(productDocRef);
+
+    if (productDocSnapshot.exists()) {
+      // Extract the document data
+      const productData = productDocSnapshot.data();
+      // Combine the ID and data into a single object
+      const productWithId = {
+        id: productId,
+        ...productData,
+      };
+      return productWithId;
+    } else {
+      console.error(`Product with ID ${productId} not found`);
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching product by ID:', error);
+    return null;
+  }
 };
+
+
+
 
 
 /*Delete Product*/

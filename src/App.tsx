@@ -7,7 +7,7 @@ import LoginPage from './components/Login/Login';
 import RegisterPage from './components/Register/Register';
 import ProductPage from './Pages/Products/Products';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
-//import DetailPage from './Pages/Details/Details';
+import DetailPage from './Pages/Details/Details';
 
 
 export default function App() {
@@ -22,7 +22,7 @@ export default function App() {
             <Route path="/products" element={<ProductPage/>} />
             <Route path="/signIn" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            
+            <Route path="/details/:productId" element={<DetailPage/>} />
           </Routes>
         <Footer/>
         </ShoppingCartProvider>

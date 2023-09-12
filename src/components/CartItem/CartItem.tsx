@@ -1,11 +1,12 @@
-import React from "react";
+import React, { Key } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import productsService from "../../Utils/productService";
-import { StoreProductProps } from "../StoreProduct/StoreProduct"; // Import the StoreProductProps type
+import { StoreProductProps } from "../StoreProduct/StoreProduct";
+import './CartItem.css'
 
 type CartItemProps = {
-  id: number;
+  id?: any;
   quantity: number;
   product: StoreProductProps | null; // Update the type to StoreProductProps
 };
@@ -16,7 +17,7 @@ export function CartItem({ id, quantity, product }: CartItemProps) {
   if (product == null) return null;
 
   return (
-    <Stack direction="horizontal" gap={2} className="d-flex align-items-center">
+    <Stack direction="horizontal" gap={2} className="d-flex align-items-center cart-item-container">
       <img
         src={product.imageUrl}
         style={{ width: "125px", height: "75px", objectFit: "cover" }}

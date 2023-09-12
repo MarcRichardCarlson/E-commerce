@@ -17,7 +17,7 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
     const productDataArray: (Product | null)[] = [];
     for (const cartItem of cartItems) {
       const product = await productsService.getProductById(cartItem.id.toString());
-      productDataArray.push(product);
+      productDataArray.push(product as unknown as Product);
     }
     setProductData(productDataArray);
   };

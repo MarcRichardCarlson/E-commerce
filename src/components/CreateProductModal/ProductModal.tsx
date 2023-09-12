@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { Key, useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import productsService from '../../Utils/productService';
 
 interface Product {
   creationDate: string | number | Date;
-  id: string;
   productName: string;
   description: string;
   price: number;
@@ -22,7 +21,6 @@ const CreateProductModal: React.FC<CreateProductModalProps> = ({
 }) => {
   const [product, setProduct] = useState<Product>({
     creationDate: new Date(),
-    id: '',
     productName: '',
     description: '',
     price: 0,

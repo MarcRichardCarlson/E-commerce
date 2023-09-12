@@ -46,10 +46,10 @@ const ProductPage = () => {
   <Container>
   <Row>
     {productList.map((product) => {
-      const key = product.id; // Store the key in a variable
-      console.log("Key:", key); // Log the key to the console
+      const Product = product;
+      console.log("Product:", Product);
       return (
-        <Col key={key} md={3} xs={1} lg={4} className='g-3'>
+        <Col md={3} xs={1} lg={4} className='g-3'>
           <StoreProduct {...product} />
         </Col>
       );
