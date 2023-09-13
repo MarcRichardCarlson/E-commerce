@@ -12,6 +12,11 @@ export const useCart = () => {
   return context;
 };
 
+interface cartItem {
+  id: string;
+  quantity: number;
+}
+
 // CartProvider component
 export const CartProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   // State for cart items
@@ -23,19 +28,19 @@ export const CartProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
   };
 
   // Remove an item from the cart
-  const removeFromCart = (itemId: number) => {
+  const removeFromCart = (itemId: string) => {
     const updatedCart = cartItems.filter((item) => item.id !== itemId);
     setCartItems(updatedCart);
   };
 
   // Get the quantity of a specific item in the cart
-  const getItemQuantity = (itemId: number) => {
+  const getItemQuantity = (itemId: string) => {
     const item = cartItems.find((item) => item.id === itemId);
     return item ? item.quantity : 0;
   };
 
   // Increase the quantity of a specific item in the cart
-  const increaseCartQuantity = (itemId: number) => {
+  const increaseCartQuantity = (itemId: string) => {
     const updatedCart = cartItems.map((item) =>
       item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
     );
@@ -43,7 +48,7 @@ export const CartProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
   };
 
   // Decrease the quantity of a specific item in the cart
-  const decreaseCartQuantity = (itemId: number) => {
+  const decreaseCartQuantity = (itemId: string) => {
     const updatedCart = cartItems.map((item) =>
       item.id === itemId && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
     );
@@ -75,17 +80,17 @@ export const CartProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
   return (
     <CartContext.Provider
       value={{
-        cartItems,
         addToCart,
         removeFromCart,
         getItemQuantity,
         increaseCartQuantity,
         decreaseCartQuantity,
-        cartTotal,
-        cartQuantity,
         openCart,
         closeCart,
-        isOpen
+        isOpen,
+        cartTotal,
+        cartQuantity,
+        cartItems,
       }}
     >
       {children}
