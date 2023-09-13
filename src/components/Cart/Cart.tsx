@@ -28,7 +28,7 @@ const Cart: React.FC = () => {
 
 
   return (
-    <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
+    <Offcanvas show={isOpen} onHide={closeCart} placement="end">
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
       </Offcanvas.Header>
