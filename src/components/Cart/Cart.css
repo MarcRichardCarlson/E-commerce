@@ -1,0 +1,35 @@
+.cart-item-group {
+    padding: 0.5rem;
+    background-color: rgb(0, 0, 0);
+    margin-bottom: 1rem;
+    height: 127px;
+    border-radius: 0.3rem;
+    color: aliceblue;
+    display: flex;
+}
+
+.cart-item-image {
+    height: 110px;
+    object-fit: contain;
+}
+
+.cart-item-body {
+    display: inline-block;
+    padding: 0.5rem;
+}
+
+.cart-item-top-body {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-item-bottom-body {
+}
+
+.cart {
+    display: none; /* Initially hide the cart */
+}
+  
+.cart.open {
+    display: block; /* Show the cart when the "open" class is applied */
+}

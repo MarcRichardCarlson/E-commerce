@@ -3,17 +3,6 @@
     box-shadow: inset 0px 1px 5px #b9b9b97b;
 }
 
-.user-info {
-    margin-left: auto;
-    margin-right: 1rem;
-    height: 2.5rem;
-    width: 7rem;
-    background-color: rgb(116, 173, 178);
-    cursor: pointer;
-    border-radius: 0.3rem;
-    padding: 0.5rem;
-    color: rgb(255, 255, 255);
-}
 
 .cart-button {
     width: 2.5rem;
@@ -34,4 +23,44 @@
     bottom: 0;
     right: 0;
     transform: translate(100%, -30%);
+}
+
+/*Login btn*/
+.login-Btn {
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+/*User info*/
+.user-info {
+    margin-left: auto;
+    margin-right: 1rem;
+    height: 2.5rem;
+    width: 9rem;
+    background-color: rgb(233, 187, 50);
+    cursor: pointer;
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+}
+
+.user-info:hover {
+    background-color: #ffd900;
+}
+
+.cogwheel {
+    height: 1.5rem;
+    margin-left: 0.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.user-info-details {
+    position: absolute;
+    top: 3.5rem;
+    z-index: 9999;
+    background-color: rgb(255, 255, 255);
+    width: 15rem;
+    height: 16rem;
+    padding: 1rem;
+    border-radius: 0.3rem;
+    color: rgb(0, 0, 0);
 }

@@ -15,7 +15,7 @@
     position: absolute;
     width: 41rem;
     height: 16rem;
-    top: 65%;
+    top: 55%;
     left: 5%;
     background-color: rgba(0, 0, 0, 0.388);
     backdrop-filter: blur(10px);
@@ -31,7 +31,7 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
 }
 
 

@@ -20,7 +20,7 @@ return (
       <Link to={`/details/${id}`}>
           <Card.Img
             variant='top'
-            height='200px'
+            height='250px'
             style={{ objectFit: 'cover' }}
             src={imageUrl}
             alt={productName}
