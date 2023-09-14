@@ -83,48 +83,7 @@ const getProducts = async () => {
     return [];
   }
 };
-/*
-const getProducts = async (): Promise<Product[]> => {
-    try {
-      const productsCollectionRef = collection(db, 'products');
-      const querySnapshot = await getDocs(productsCollectionRef);
 
-      //console.log('querySnapshot' ,querySnapshot)
-  
-      const productsData: Product[] = [];
-      querySnapshot.forEach((doc) => {
-        const product = doc.data() as Product;
-        productsData.push(product);
-      });
-  
-      return productsData;
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      throw error;
-    }
-};
-*/
-/*
-async function getProductById(id: string): Promise<Product | null> {
-  try {
-    const productDocRef = doc(db, "products", id);
-    const productDocSnapshot = await getDoc(productDocRef);
-    //console.log('productDocRef', productDocRef)
-    console.log('productDocSnapshot' ,productDocSnapshot)
-    console.log('id', id)
-
-    if (productDocSnapshot.exists()) {
-      const productData = productDocSnapshot.data() as Product;
-      return productData;
-    } else {
-      return null;
-    }
-  } catch (error) {
-    console.error(`Error fetching product with ID ${id}:`, error);
-    throw error;
-  }
-}
-*/
 
 /* Get Product By ID */
 const getProductById = async (productId: string) => {
@@ -150,9 +109,6 @@ const getProductById = async (productId: string) => {
     return null;
   }
 };
-
-
-
 
 
 /*Delete Product*/

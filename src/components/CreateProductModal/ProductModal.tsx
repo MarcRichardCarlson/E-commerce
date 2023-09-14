@@ -46,6 +46,7 @@ const CreateProductModal: React.FC<CreateProductModalProps> = ({
     try {
       await productsService.createProduct(product);
       console.log('Product created successfully');
+      window.location.reload()
     } catch (error) {
       console.error('Error creating product:', error);
     }

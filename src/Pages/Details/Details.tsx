@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import productsService from '../../Utils/productService';
 import './Details.css';
@@ -17,8 +17,11 @@ interface ProductDetailsProps {
 const DetailsPage: React.FC = () => {
   const [product, setProduct] = useState<ProductDetailsProps | null>(null);
   const { productId } = useParams<{ productId: string }>();
-
-  const { addToCart, increaseCartQuantity, decreaseCartQuantity, getItemQuantity } = useCart();
+  const navigate = useNavigate();
+  
+  const { 
+  addToCart,
+  } = useCart();
 
   useEffect(() => {
     if (productId) {
@@ -43,6 +46,20 @@ const DetailsPage: React.FC = () => {
     }
   }, [productId]);
 
+  /*HandleDelete*/
+  const handleDeleteProduct = async () => {
+    if (product) {
+      try {
+        await productsService.deleteProduct(product.id);
+        console.log("Product deleted successfully");
+
+        navigate('/products');
+      } catch (error) {
+        console.error('Error deleting product:', error);
+      }
+    }
+  };
+
   if (!product) {
     // Placeholder card here if data is not loading in
     return <div className="spinner"></div>;
@@ -57,10 +74,11 @@ const DetailsPage: React.FC = () => {
               <img className='details-card-image' src={product.imageUrl} alt={`Image of ${product.productName}`} />
             </Card.Header>
             <Card.Body className='details-card-body'>
+              <Button onClick={handleDeleteProduct} className='btn btn-danger btn-sm details-remove-product'>Remove Product</Button>
               <Card.Title className='details-card-title'>{product.productName}</Card.Title>
               <Card.Text className='details-card-description'>{product.description}</Card.Text>
-              <Card.Text className='details-card-price'>Price: $ {product.price}</Card.Text>
-              <div className='details-card-quantity'>
+              <div className='details-card-bottom'>
+                <Card.Text className='details-card-price'>Price: $ {product.price}</Card.Text>
                 <Button variant="primary" onClick={() => addToCart(product)}>Add to cart</Button>
               </div>
             </Card.Body>
