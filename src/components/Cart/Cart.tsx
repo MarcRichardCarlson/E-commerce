@@ -50,12 +50,12 @@ const Cart: React.FC = () => {
                   <Button className='btn btn-danger btn-sm' onClick={() => removeFromCart(item.id)}>
                     Remove
                   </Button>
-                  <Button className='btn btn-primary btn-sm' onClick={() => increaseCartQuantity(item.id)}>
-                    +
-                  </Button>
-                  (0{getItemQuantity})
                   <Button className='btn btn-primary btn-sm' onClick={() => decreaseCartQuantity(item.id)}>
                     -
+                  </Button>
+                  {getItemQuantity(item.id)}
+                  <Button className='btn btn-primary btn-sm' onClick={() => increaseCartQuantity(item.id)}>
+                    +
                   </Button>
                 </div>
               </div>

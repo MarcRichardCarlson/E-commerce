@@ -12,9 +12,13 @@ export const useCart = () => {
   return context;
 };
 
-interface cartItem {
-  id: string;
-  quantity: number;
+interface ProductDetailsProps {
+  creationDate: string | number | Date;
+  productName: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  id: string; 
 }
 
 // CartProvider component
@@ -23,9 +27,24 @@ export const CartProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
   const [cartItems, setCartItems] = useState<any[]>([]);
 
   // Add an item to the cart
-  const addToCart = (item: any) => {
-    setCartItems([...cartItems, { ...item, quantity: 1 }]);
+  // Add an item to the cart
+const addToCart = (item: ProductDetailsProps) => {
+  const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
+
+    if (existingItemIndex !== -1) {
+      // If the item already exists in the cart, increment its quantity
+      const updatedCartItems = [...cartItems];
+      updatedCartItems[existingItemIndex] = {
+        ...updatedCartItems[existingItemIndex],
+        quantity: updatedCartItems[existingItemIndex].quantity + 1,
+      };
+      setCartItems(updatedCartItems);
+    } else {
+      // If the item doesn't exist in the cart, add it with quantity 1
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+    }
   };
+
 
   // Remove an item from the cart
   const removeFromCart = (itemId: string) => {
@@ -67,13 +86,11 @@ export const CartProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
   // Open the cart
   const openCart = () => {
     setIsOpen(true);
-    console.log('Opening cart');
   };
 
   // Close the cart
   const closeCart = () => {
     setIsOpen(false);
-    console.log('Closing cart');
   };
 
   // Provide the cart data to components
