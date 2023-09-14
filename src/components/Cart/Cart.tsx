@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, ListGroup, Offcanvas } from 'react-bootstrap';
 import { useCart } from '../../context/CartContext';
 import './Cart.css';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+
 
 interface ProductDetailsProps {
   creationDate: string | number | Date;
@@ -25,6 +27,27 @@ const Cart: React.FC = () => {
     isOpen, 
     closeCart 
   } = useCart();
+
+   // Use the useLocalStorage hook to save and load cartItems
+  const [savedCartItems, setSavedCartItems] = useLocalStorage<ProductDetailsProps[]>("cartItems", []);
+
+  // When the component mounts, update the cartItems with the savedCartItems
+  useEffect(() => {
+    if (savedCartItems.length > 0) {
+      // Loop through savedCartItems and add them to cartItems
+      savedCartItems.forEach(item => {
+        if (!cartItems.some((existingItem: { id: string; }) => existingItem.id === item.id)) {
+          cartItems.push(item);
+        }
+      });
+    }
+  }, [savedCartItems]);
+
+  // When cartItems change, update the savedCartItems
+  useEffect(() => {
+    setSavedCartItems(cartItems);
+  }, [cartItems]);
+
 
 
   return (
